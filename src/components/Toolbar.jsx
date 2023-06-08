@@ -3,13 +3,21 @@ import { useState } from "react";
 const Toolbar = (props) => {
 
     const { filters, selected } = props;
+    console.log(selected.selected)
     // const [state, setState] = useState()
 
     // console.log(onSelectFilter)
+    const filtering = (category) => {
+        console.log(category)
+    };
+
     return(
         <div className="filter-bar">
             {filters.map((item) => 
-                item !== selected[0] ? <div  className="filter-item">{item}</div> : <div className="filter-item selected">{item}</div>)
+                item !== selected.selected ? 
+                    <button className="filter-item" onClick={() => filtering(item)}>{item}</button> : 
+                    <button className="filter-item selected">{item}</button>
+                )
             }
         </div>
     )
