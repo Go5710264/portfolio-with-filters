@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css'
 import Portfolio from './components/Portfolio';
-import ProjectList from './components/ProjectList';
 
 const list = [{
     img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/mon.jpg",

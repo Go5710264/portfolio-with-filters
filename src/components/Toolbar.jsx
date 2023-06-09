@@ -1,26 +1,26 @@
-import { useState } from "react";
+import PropTypes from 'prop-types';
+import FilterButton from "./FilterButton";
 
 const Toolbar = (props) => {
-
-    const { filters, selected } = props;
-    console.log(selected.selected)
-    // const [state, setState] = useState()
-
-    // console.log(onSelectFilter)
-    const filtering = (category) => {
-        console.log(category)
-    };
+    const { filters, onSelectFilter } = props;
+    console.log(filters)
 
     return(
         <div className="filter-bar">
             {filters.map((item) => 
-                item !== selected.selected ? 
-                    <button className="filter-item" onClick={() => filtering(item)}>{item}</button> : 
-                    <button className="filter-item selected">{item}</button>
-                )
-            }
+                <FilterButton 
+                    key={item} 
+                    nameFilter={item} 
+                    onSelectFilter={onSelectFilter} />
+            )}
         </div>
     )
+}
+
+Toolbar.propTypes = {
+    filters: PropTypes.array,
+    onSelectFilter: PropTypes.func,
+    map: PropTypes.func
 }
 
 export default Toolbar;

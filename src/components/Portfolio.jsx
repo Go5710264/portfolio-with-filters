@@ -1,15 +1,14 @@
-import React, { Component } from "react";
+import { Component } from "react";
+import PropTypes from 'prop-types';
  import Toolbar from "./Toolbar";
  import ProjectList from "./ProjectList";
 
 class Portfolio extends Component {
     constructor(props){ // props === list
         super(props); // передача list в наследуемы класс Component 
-        this.filters = ['All', 'Websites', 'Flayers', 'Business Cards'];
-        this.selected = ['All'];
-        this.projectList = ProjectList;
-        console.log(this.projectList)
         this.state = {selected: 'All'}; // начальное состояние
+        this.filters = ['All', 'Websites', 'Flayers', 'Business Cards'];
+        // this.selected = ['All'];
     }
 
     render() {
@@ -18,13 +17,22 @@ class Portfolio extends Component {
                 <Toolbar 
                     filters={this.filters}
                     selected={this.state}
-                    // onSelectFilter={(filter) => this.setState({selected:filter})} // обработчик события?? Как это понять? откуда берется filter?
-                    onSelectFilter={(filter) => console.log(filter)} // обработчик события?? Как это понять? откуда берется filter?
-
+                    onSelectFilter={(filter) => this.setState({selected: filter})}
+                /*onSelectFilter - является функцией, которая передается внутрь компонента
+                    и далее учавствует в обработке события
+                    при нажатии на один из фильтров this.setState обновит состояние this.state
+                    произойдет рендеринг и новое значение this.state поступит в ProjectList  */
                 />
-                <ProjectList profile={this.props}/>
+                <ProjectList profile={this.state.selected === 'All' ? 
+                this.props.list : 
+                this.props.list.filter(element => element.category === this.state.selected)}
+                />
             </>
         )
     }
+}
+
+Portfolio.propTypes = {
+    list: PropTypes.array
 }
 export default Portfolio
