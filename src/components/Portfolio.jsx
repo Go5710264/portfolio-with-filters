@@ -25,7 +25,7 @@ class Portfolio extends Component {
                 />
                 <ProjectList profile={this.state.selected === 'All' ? 
                 this.props.list : 
-                this.props.list.filter(element => element.category === this.state.selected)}
+                this.props.list.filter(element => element.category === this.state.selected)} className={this.state.selected}
                 />
             </>
         )
@@ -33,6 +33,6 @@ class Portfolio extends Component {
 }
 
 Portfolio.propTypes = {
-    list: PropTypes.array
+    list: PropTypes.array,
 }
 export default Portfolio

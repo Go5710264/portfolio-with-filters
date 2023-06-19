@@ -3,7 +3,6 @@ import FilterButton from "./FilterButton";
 
 const Toolbar = (props) => {
     const { filters, onSelectFilter } = props;
-    console.log(filters)
 
     return(
         <div className="filter-bar">
