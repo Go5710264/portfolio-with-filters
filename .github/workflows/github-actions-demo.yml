@@ -1,27 +1,27 @@
 name: Dak1CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - "master" # change to the branch you wish to deploy from
 
-# Down scope as necessary via https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
 permissions:
-  checks: write
-  contents: write
+  contents: read
   pages: write
   id-token: write
-  deployments: write
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  deploy:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    strategy:
-      matrix:
-        node-version: [18.x]
-
+      url: ${{ steps.build-publish.outputs.page_url }}
+    runs-on: ubuntu-latest
     steps:
+      - id: build-publish
+        uses: bitovi/github-actions-react-to-ghp@v1.2.0
+        with:
+          path: build # change to your build folder
+
       - uses: actions/checkout@v3
 
       - name: Use Node.js ${{ matrix.node-version }}
@@ -48,6 +48,3 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           path: 'dist'
-
-      - name: Deploy React to GitHub Pages
-        uses: bitovi/github-actions-react-to-ghp@v1.2.0
