@@ -47,7 +47,7 @@
 
 .filter-item:focus,
 .filter-item:focus-visible {
-  border-color: white;
+  border: none;
 }
 
 .portfolio-board{

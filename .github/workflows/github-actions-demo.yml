@@ -1,21 +1,18 @@
-on:
-  push:
-    branches:
-      - "master" # change to the branch you wish to deploy from
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+name: Dak1 CI/CD React
+on: [push, pull_request]
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.build-publish.outputs.page_url }}
+  lint:
     runs-on: ubuntu-latest
     steps:
-    - id: build-publish
-      uses: bitovi/github-actions-react-to-ghp@v1.2.0
-      with:
-        path: build # change to your build folder
+      - name: Get repository code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint application
+        run: npm run lint
+
+      - name: Print deploy
+        run: echo deploying

@@ -8,7 +8,6 @@ class Portfolio extends Component {
         super(props); // передача list в наследуемы класс Component 
         this.state = {selected: 'All'}; // начальное состояние
         this.filters = ['All', 'Websites', 'Flayers', 'Business Cards'];
-        // this.selected = ['All'];
     }
 
     render() {
